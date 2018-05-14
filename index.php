@@ -24,6 +24,8 @@ SOFTWARE.
 Andrew Galdes (AGIX), andrew.galdes@agix.com.au
 http://www.agix.com.au
 
+With contribution by Steve Simpson (software@lcsas.us).
+
 A script to allow simplified log filtering. 
 
 Refer to the following article for more information:
@@ -36,21 +38,17 @@ system logs.
 
 
 // START OF OPTIONS
-
-$servername = "localhost";
-$username = "sysloguser"; // Limit this user in MySQL to SELECT statements.
-$password = "MySecretMySQLPassword";
-$dbname = "Syslog";
-$max_results = 200; // The maximum number of rows to return.
-$logo = "http://www.agix.com.au/wp-content/uploads/2014/12/agix_black_1.png"; // Ideally less than 300px high. 
-$title = "Log Filter Portal"; 
-
+// moved to external file that is filtered by Apache
+require(".ht_config.php");
 // END OF OPTIONS
 
-// Get filter options from the previous form.
-$filter_timestamp = strip_tags($_REQUEST['filter_timestamp']);
-$filter_log = strip_tags($_REQUEST['filter_log']);
-$filter_server = strip_tags($_REQUEST['filter_server']);
+// Get variables and prevent SQL injection. 
+preg_match('/[A-Za-z0-9\-\. :]*/', $_REQUEST['filter_timestamp'], $match1);
+preg_match('/[A-Za-z0-9\-\. :]*/', $_REQUEST['filter_log'],       $match2);
+preg_match('/[A-Za-z0-9\-\. :]*/', $_REQUEST['filter_server'],    $match3);
+$filter_timestamp = $match1[0];
+$filter_log       = $match2[0];
+$filter_server    = $match3[0];
 
 // Create DB connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
@@ -135,7 +133,15 @@ echo "Results: " . $counter . " (max " . $max_results . ")";
 ?>
 
 <hr>
-<a href="http://www.agix.com.au">AGIX</a>
+<?php
+    if ($srcLink) {
+        echo "<a href='$srcLink'>$srcName</a>";
+    } elseif ($srcName) {
+        echo $srcName;
+    } else {
+	echo '<a href="http://www.agix.com.au">AGIX</a>';
+    }
+?>
 </body>
 </html>
 <?php
