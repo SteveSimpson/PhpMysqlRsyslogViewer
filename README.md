@@ -33,6 +33,8 @@ I suggest you view your logs over https, but not going into all the setup here.
 yum install httpd mod_ssl php php-mysqlnd
 ```
 
+Other things to think about are 
+
 ### 2. Clone the repo
 
 I'm using CentOS 7, so all the defaults will be geared for that. Your mileage may vary. I suggest you clone into /var/www/PhpMysqlRsyslogViewer
@@ -101,9 +103,9 @@ MariaDB [(none)]> exit
 
 ### 7. Configure Apache to show the pages
 
-I suggest that you use Apache to add a password 
+I suggest that you use Apache to add a password. This will make the logs avaiable at https://localhost/log
 
-add this file to /etc/httpd/conf.modules.d/
+add this file to /etc/httpd/conf.modules.d/ & make sure that it is included by your httpd.conf file.
 
 log.conf
 
@@ -130,7 +132,15 @@ if you use basic auth:
 * add another user to the file: htpasswd /var/www/PhpMysqlRsyslogViewer/config/users tsmith
 * read lots more about this and understand what you are doing: https://httpd.apache.org/docs/current/howto/auth.html
 
-### 8. Optional, Configure Apache to log syslog
+
+
+### 8. Fix SELINUX
+
+```
+restorecon -R /var/www/PhpMysqlRsyslogViewer
+```
+
+### 9. Optional, Configure Apache to log syslog
 
 Replace your logging lines in Apache with something like the following:
 
