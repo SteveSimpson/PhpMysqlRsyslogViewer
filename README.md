@@ -118,7 +118,7 @@ Alias /log /var/www/PhpMysqlRsyslogViewer/web
   AuthType Basic
   AuthName "Syslog Server"
   AuthBasicProvider file
-  AuthUserFile "/var/www/PhpMysqlRsyslogViewer/users"
+  AuthUserFile "/var/www/PhpMysqlRsyslogViewer/config/users"
   Require valid-user
   
 </Directory>
@@ -126,8 +126,8 @@ Alias /log /var/www/PhpMysqlRsyslogViewer/web
 
 if you use basic auth:
 
-* create the file: htpasswd -c /var/www/PhpMysqlRsyslogViewer/users fjones
-* add another user to the file: htpasswd /var/www/PhpMysqlRsyslogViewer/users tsmith
+* create the file: htpasswd -c /var/www/PhpMysqlRsyslogViewer/config/users fjones
+* add another user to the file: htpasswd /var/www/PhpMysqlRsyslogViewer/config/users tsmith
 * read lots more about this and understand what you are doing: https://httpd.apache.org/docs/current/howto/auth.html
 
 ### 8. Optional, Configure Apache to log syslog
