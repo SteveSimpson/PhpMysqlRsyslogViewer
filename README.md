@@ -25,9 +25,7 @@ So definitely not as simple anymore, but I was able to document all the installa
 
 ## Installation
 
-### Install Web App
-
-1. Setup your system
+### 1. Setup your system
 
 I suggest you view your logs over https, but not going into all the setup here.
 
@@ -35,11 +33,11 @@ I suggest you view your logs over https, but not going into all the setup here.
 yum install httpd mod_ssl php php-mysqlnd
 ```
 
-2. Clone the repo
+### 2. Clone the repo
 
 I'm using CentOS 7, so all the defaults will be geared for that. Your mileage may vary. I suggest you clone into /var/www/PhpMysqlRsyslogViewer
 
-3. Optionally, Download Bootstrap libraries
+### 3. Optionally, Download Bootstrap libraries
 
 I like having local libraries and being able to update them... If you don't care the app will just grab the CDN ones.
 
@@ -51,7 +49,7 @@ composer update
 ./grab-assets
 ```
 
-4. Update the Configuration File
+### 4. Update the Configuration File
 
 ```
 cd /var/www/PhpMysqlRsyslogViewer
@@ -61,7 +59,7 @@ cp -a config/config.php.sample config/config.php
 vi config/config.php
 ```
 
-5. Setup rsyslog to MySQL / MariaDB
+### 5. Setup rsyslog to MySQL / MariaDB
 
 Lots of good instructions on this, but just for completeness, I'll give you the quick and dirty for your local system here; note this is for CentOS 7 at time of writing, version numbers/paths will change. Please don't use my default passord, its very bad form. 
 
@@ -86,7 +84,7 @@ $ModLoad ommysql.so
 *.*  :ommysql:localhost,Syslog,rsyslog,some_other_password
 ```
 
-6. Configure MySQL / MariaDB
+### 6. Configure MySQL / MariaDB
 
 I'm using this on my local system with no network connectivity, if you use a network database, I suggest that you setup an encrypted connection. Please don't use my default passord, its very bad form. 
 
@@ -101,7 +99,7 @@ MariaDB [(none)]> flush privileges;
 MariaDB [(none)]> exit
 ```
 
-7. Configure Apache to show the pages
+### 7. Configure Apache to show the pages
 
 I suggest that you use Apache to add a password 
 
@@ -132,7 +130,7 @@ if you use basic auth:
 * add another user to the file: htpasswd /var/www/PhpMysqlRsyslogViewer/users tsmith
 * read lots more about this and understand what you are doing: https://httpd.apache.org/docs/current/howto/auth.html
 
-8. Optional, Configure Apache to log syslog
+### 8. Optional, Configure Apache to log syslog
 
 Replace your logging lines in Apache with something like the following:
 
@@ -143,9 +141,6 @@ ErrorLog "|$logger -t httpd -p 4"
 CustomLog "|$logger -t httpd -p 6" \
           "%t %h %{SSL_PROTOCOL}x %{SSL_CIPHER}x \"%r\" %b"
 ```
-
-
-
 
 
 
