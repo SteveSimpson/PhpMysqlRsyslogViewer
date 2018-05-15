@@ -1,0 +1,6 @@
+{
+	"minimum-stability" : "stable",
+	"require" : {
+		"bower-asset/bootstrap" : "*"
+	}
+}

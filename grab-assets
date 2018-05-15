@@ -1,0 +1,19 @@
+#!/bin/bash
+umask 0022
+SCRIPTDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+cd $SCRIPTDIR
+
+if [ ! -d web/vendor/css ] ; then
+  mkdir -p web/vendor/css 
+fi
+
+if [ ! -d web/vendor/js ] ; then
+  mkdir web/vendor/js 
+fi
+
+find vendor -name bootstrap.min.css        -exec /bin/cp -f {} web/vendor/css/ \;
+find vendor -name bootstrap-grid.min.css   -exec /bin/cp -f {} web/vendor/css/ \;
+find vendor -name bootstrap-reboot.min.css -exec /bin/cp -f {} web/vendor/css/ \;
+find vendor -name bootstrap.min.js         -exec /bin/cp -f {} web/vendor/js/ \;
+find vendor -name jquery-slim.min.js       -exec /bin/cp -f {} web/vendor/js/ \;
+find vendor -name popper.min.js            -exec /bin/cp -f {} web/vendor/js/ \;
