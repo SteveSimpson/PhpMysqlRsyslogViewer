@@ -6,7 +6,7 @@
 namespace libs;
 
 
-require_once dirname(__FILE__, 2).'/vendor/autoload.php';
+require_once dirname(dirname(__FILE__)).'/vendor/autoload.php';
 require_once dirname(__FILE__).'/BaseView.php';
 
 class App
@@ -35,11 +35,11 @@ class App
         } 
         
         if (!isset($this->config)) {
-            if (!is_readable( dirname(__FILE__, 2)."/config/config.php")) {
-                die('Pleaase add and configure ' . dirname(__FILE__, 2)."/config/config.php");
+            if (!is_readable( dirname(dirname(__FILE__))."/config/config.php")) {
+                die('Pleaase add and configure ' . dirname(dirname(__FILE__))."/config/config.php");
             }
             
-            $this->config = require(dirname(__FILE__, 2)."/config/config.php");
+            $this->config = require(dirname(dirname(__FILE__))."/config/config.php");
             
             //print_r($this->config); die();
         }
@@ -47,7 +47,6 @@ class App
         if (!isset($this->view)) {
             $this->view = new BaseView();
             
-            $this->view->title = $this->config['title'];
             $this->view->logo = $this->config['logo'];
         }
         

@@ -23,7 +23,7 @@ SOFTWARE.
 */
 
 
-require_once(dirname(__FILE__, 2) . "/libs/app.php");
+require_once(dirname(dirname(__FILE__)) . "/libs/app.php");
 
 $app = new libs\App();
 

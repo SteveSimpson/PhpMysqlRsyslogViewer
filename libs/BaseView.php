@@ -20,7 +20,7 @@ class BaseView
     
     public function header($title) {
         
-        if (is_readable(dirname(__FILE__, 2) . "/vendor/css/bootstrap.min.css" )) {
+        if (is_readable(dirname(dirname(__FILE__)) . "/vendor/css/bootstrap.min.css" )) {
             
             $head = <<<ENDHEAD
 <!-- Latest compiled and minified CSS -->
