@@ -46,10 +46,12 @@ I like having local libraries and being able to update them... If you don't care
 ```
 cd /var/www/PhpMysqlRsyslogViewer
 
-composer update
+composer install
 
 ./grab-assets
 ```
+
+If you have composer setup and you want to try the latest Bootstrap, you can run a composer update.
 
 ### 4. Update the Configuration File
 
