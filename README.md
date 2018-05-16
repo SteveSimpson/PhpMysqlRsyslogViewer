@@ -88,6 +88,12 @@ $ModLoad ommysql.so
 *.*  :ommysql:localhost,Syslog,rsyslog,some_other_password
 ```
 
+Restart rsyslog
+
+```
+systemctl resstart rsyslog
+```
+
 ### 6. Configure MySQL / MariaDB
 
 I'm using this on my local system with no network connectivity, if you use a network database, I suggest that you setup an encrypted connection. Please don't use my default passord, its very bad form. 
